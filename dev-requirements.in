@@ -1,0 +1,10 @@
+bandit
+black
+coverage
+django==3.2.9
+flake8==3.8.4
+isort
+# model-bakery  # this breaks all our shit
+pre-commit
+prospector
+safety

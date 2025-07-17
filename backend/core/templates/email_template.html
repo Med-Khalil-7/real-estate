@@ -1,0 +1,7 @@
+{% block subject %}
+Hi, <strong>{{ user.first_name }}  {{ user.last_name }}</strong> 
+{% endblock %}
+{% block body %}
+Please click on the link to confirm your registration,
+http://{{ domain }}/#{{ route }}/{{ uid }}/{{ token }}
+{% endblock %}

@@ -1,0 +1,490 @@
+-   model: core.address
+    pk: 1
+    fields:
+        city: test
+        state: test
+        district: test
+-   model: core.address
+    pk: 2
+    fields:
+        city: test
+        state: test
+        district: test
+-   model: core.address
+    pk: 3
+    fields:
+        city: test
+        state: test
+        district: test
+-   model: core.address
+    pk: 4
+    fields:
+        city: test
+        state: test
+        district: test
+-   model: core.user
+    pk: 1
+    fields:
+        password: pbkdf2_sha256$260000$L2DaLOhlcLgesHJVYZi9LY$Dp6RvhTTFG+qIKy9PQWogkumbSZ+mUhESRLa8+dAqTc=
+        last_login: null
+        is_superuser: true
+        id_number: 99999999
+        id_type: NA
+        is_landlord: false
+        is_tenant: false
+        is_employee: false
+        first_name: monirah
+        last_name: the hina
+        email: monirah@thehina.com
+        is_staff: true
+        is_active: true
+        address: 1
+        phone_number: '123456'
+        gender: F
+        title: null
+        department: null
+        hire_date: null
+        start_date: null
+        groups: [ ]
+        user_permissions: [ ]
+-   model: core.user
+    pk: 2
+    fields:
+        password: pbkdf2_sha256$260000$UFiUG995de6fUYYp2y94eL$MIrlR2tJaXvqgmONX8LrlLTukZlWmHKjxrUazcV0eJE=
+        last_login: null
+        is_superuser: false
+        id_number: 99999999
+        id_type: NA
+        is_landlord: true
+        is_tenant: false
+        is_employee: false
+        first_name: landlord
+        last_name: landlord
+        email: landlord@landlord.com
+        is_staff: false
+        is_active: true
+        address: 2
+        phone_number: '123456'
+        gender: M
+        title: null
+        department: null
+        hire_date: null
+        start_date: null
+        groups: [ ]
+        user_permissions: [ ]
+-   model: core.user
+    pk: 3
+    fields:
+        password: pbkdf2_sha256$260000$Mrv780SuqDx01TH4tDjmlT$9SL3GgOZZaKSZV7sXx0D9INU1pohTYDriD9DFtbRgoQ=
+        last_login: null
+        is_superuser: false
+        id_number: 123456
+        id_type: NA
+        is_landlord: false
+        is_tenant: true
+        is_employee: false
+        first_name: tenant
+        last_name: tenant
+        email: tenant@tenant.com
+        is_staff: false
+        is_active: true
+        address: 3
+        phone_number: '123456'
+        gender: M
+        title: null
+        department: null
+        hire_date: null
+        start_date: null
+        groups: [ ]
+        user_permissions: [ ]
+-   model: core.taxrate
+    pk: 1
+    fields:
+        name: VAT(18%)
+        rate: '0.18000'
+-   model: core.apartment
+    pk: 1
+    fields:
+        created: 2022-02-08 17:07:16.596331
+        updated: 2022-02-08 17:08:41.351168
+        created_by: null
+        updated_by: null
+        is_vacant: false
+        has_parking: true
+        has_internet_connection: false
+        has_gas: false
+        has_electricity: false
+        has_airconditioning: false
+        pets_allowed: false
+        area: '520.00'
+        room_count: 12
+        number: 47
+        bedroom_count: 2
+        tower: null
+-   model: core.property
+    pk: 1
+    fields:
+        created: 2022-02-08 17:07:16.604624
+        updated: 2022-02-08 17:07:16.604660
+        created_by: null
+        updated_by: null
+        name: test
+        owner: 2
+        address: 4
+        villa: null
+        commercial: null
+        apartment: 1
+-   model: core.unitcontract
+    pk: 1
+    fields:
+        created: 2022-02-08 17:08:37.916451
+        updated: 2022-02-08 17:08:41.336482
+        created_by: null
+        updated_by: null
+        start_date: 2021-11-30 23:00:00
+        end_date: 2030-02-07 23:00:00
+        remarks: test
+        state: S
+        document: ''
+        property: 1
+        tenant: 3
+        contract_type: RENT
+        location_price: '1485.00'
+        deposit: '0.00'
+        tax_rate: 1
+-   model: core.invoice
+    pk: 1
+    fields:
+        number: 1
+        total_incl_tax: '1.78'
+        total_excl_tax: '1.51'
+        date_issued: 2021-12-01
+        date_dued: 2022-02-08
+        date_paid: null
+        notes: ''
+        terms: ''
+        contract: 1
+        tenant: 3
+-   model: core.invoice
+    pk: 2
+    fields:
+        number: 2
+        total_incl_tax: '6.34'
+        total_excl_tax: '5.37'
+        date_issued: 2022-01-11
+        date_dued: 2022-02-08
+        date_paid: null
+        notes: ''
+        terms: ''
+        contract: 1
+        tenant: 3
+-   model: core.invoiceline
+    pk: 1
+    fields:
+        label: Payment
+        description: ''
+        unit_price_excl_tax: '1.51'
+        quantity: '1.00'
+        invoice: 1
+        tax_rate: 1
+-   model: core.invoiceline
+    pk: 2
+    fields:
+        label: Maintenance fees
+        description: ''
+        unit_price_excl_tax: '1.25'
+        quantity: '1.00'
+        invoice: 2
+        tax_rate: 1
+-   model: core.invoiceline
+    pk: 3
+    fields:
+        label: Electricity fees
+        description: ''
+        unit_price_excl_tax: '2.60'
+        quantity: '1.00'
+        invoice: 2
+        tax_rate: 1
+-   model: core.invoiceline
+    pk: 4
+    fields:
+        label: Water fees
+        description: ''
+        unit_price_excl_tax: '1.52'
+        quantity: '1.00'
+        invoice: 2
+        tax_rate: 1
+-   model: core.bill
+    pk: 1
+    fields:
+        number: 1
+        total_incl_tax: '1.42'
+        total_excl_tax: '1.20'
+        date_issued: 2022-02-08
+        date_dued: 2022-02-08
+        date_paid: null
+        notes: ''
+        terms: ''
+        contract: 1
+        tenant: 3
+-   model: core.bill
+    pk: 2
+    fields:
+        number: 2
+        total_incl_tax: '1.49'
+        total_excl_tax: '1.26'
+        date_issued: 2022-02-01
+        date_dued: 2022-02-08
+        date_paid: null
+        notes: ''
+        terms: ''
+        contract: 1
+        tenant: 3
+-   model: core.billline
+    pk: 1
+    fields:
+        label: Guardian monthly payment
+        description: ''
+        unit_price_excl_tax: '1.20'
+        quantity: '1.00'
+        bill: 1
+        tax_rate: 1
+-   model: core.billline
+    pk: 2
+    fields:
+        label: Garage rent
+        description: ''
+        unit_price_excl_tax: '1.26'
+        quantity: '1.00'
+        bill: 2
+        tax_rate: 1
+-   model: core.payment
+    pk: 1
+    fields:
+        amount: '1.78'
+        detail: null
+        date_paid: 2022-02-08
+        reference: null
+        content_type: 18
+        object_id: 1
+-   model: core.payment
+    pk: 2
+    fields:
+        amount: '1.42'
+        detail: null
+        date_paid: 2022-02-08
+        reference: null
+        content_type: 11
+        object_id: 1
+- model: core.HtmlTemplate
+  pk: 1
+  fields:
+      name: "Apartment contract"
+      template_type: "AC"
+      template_code: >
+          <!DOCTYPE html>
+          <html lang="ar">
+            <head> </head>
+            <body dir="rtl">
+              <h2>
+                عقد إيجار وحدة سكنية
+              </h2>
+              <p><span>محدد المدة</span></p>
+              <p><span>أنه فى يوم {% now "D" %} الموافق {% now "Y/M" %} </span></p>
+              <p><span>حرر هذا العقد بين كل من :</span></p>
+              <p><span>أولا :</span></p>
+              <p><span> السيد {{contract.tenant.first_name}} {{contract.tenant.last_name}} <span></p>
+              <p><span> المقيم في {{contract.tenant.address}}</span></p>
+              <p>
+                <span>اثبات شخصة بموجب / بطاقة احوال شخصية رقم : ........ صالحة لغاية ..../..../....</span>
+              </p>
+              <p><span>(طرف أول مؤجر)</span></p>
+              <p><span>ثانيا :</span></p>
+              <p><span> السيد {{contract.apartment.building.owner.first_name}} {{contract.apartment.building.owner.last_name}} <span></p>
+              <p><span> المقيم في {{contract.apartment.building.owner.address}}</span></p>
+              <p>
+                <span>اثبات شخصة بموجب / بطاقة احوال شخصية رقم : ........ صالحة لغاية ..../..../....</span>
+              </p>
+              <p><span>(طرف ثاني مستاجر)</span></p>
+              <p><span>تمهيد</span></p>
+              <p>
+                <span>يمتلك الطرف الأول المؤجر الوحدة السكنية رقم (......) الكائنة بالدور (.....) – بالعقار رقم
+                  (......) – بمدينة (.....) - بحي (......)</span>
+              </p>
+              <p>
+                <span>ولما كان الطرف الثاني المستأجر يرغب فى استئجار الوحد السكنية المبينة عاليه .</span>
+              </p>
+              <p>
+                <span>وحيث أن تلك الرغبة قد لاقت رضا الطرفين لذا وبعـد أن أقـر الطرفـان بأهليتهما القانونية
+                  للتعاقد وابرام التصرفات والاتفاق والتراضي والقبول – فقد اتفقا على التالي .</span>
+              </p>
+              <p><span>البند الأول</span></p>
+              <p><span>حجية التمهيد</span></p>
+              <p>
+                <span>التمهيد السابق جزء لا يتجزأ من هذا العقد ومتمما ومكملا لأركانه .</span>
+              </p>
+              <p><span>البند الثاني</span></p>
+              <p><span>مدة العقد</span></p>
+              <p>
+                <span>اتفق الطرفان على أن مدة هذا العقد هي (.................) تبدأ من ...../ ..... / .....
+                  وتنتهي في .... /.... / ......</span>
+              </p>
+              <p>
+                <span>غير قابلة للتجديد أو للامتداد لمدة أخرى إلا بعقد جديد بين الطرفين .</span>
+              </p>
+              <p><span>البند الثالث</span></p>
+              <p><span>القيمة الإيجارية</span></p>
+              <p>
+                <span>اتفق الطرفان على أن القيمة الإيجارية هي مبلغ قدره ........... شهريا (فقط ............لاغير)
+                  تسدد في الأول من كل شهر هجري وذلك مقابل ايصال موقع عليه من الطرف الأول المؤجر أو من ينوب عنه
+                  قانونيا .</span>
+              </p>
+              <p><span>البند الرابع</span></p>
+              <p><span>قيمة التأمين</span></p>
+              <p>
+                <span>اتفق الطرفان على قيـام الطرف الثاني المستأجر بدفع مبلغ قدره ............... (فقط
+                  ............لا غير) كتأمين لا تحتسب عليه أية فوائد قانونية ولا يسترده الطرف الثاني المستأجر
+                  إلا بعد انتهاء مدة العقد وبعد خصم أية نفقات نظير أية تلفيـات تحدث بالعين المؤجرة أو أية
+                  مصاريف خاصة بالعين موضوع العقد ، ويكون توقيع الطرف الأول المؤجر على العقد مخالصة منه باستلام
+                  قيمة هذا التأمين .</span>
+              </p>
+              <p><span>البند الخامس</span></p>
+              <p><span>معاينة العين المؤجرة</span></p>
+              <p>
+                <span>يقر الطرف الثاني المستأجر بأنه قد عاين العين المؤجرة المعاينة التامة النافية للجهالة شرعا
+                  وقانونا وأنه قبلها بحالتها وقت التعاقد وأن العين المؤجرة مستوفاه لجميع المرافق من مياه
+                  وكهرباء وسباكة وشبابيك وكوالين وأرضيات وأن العين المؤجرة خالية من أي خلل أو تلفيات وأنها
+                  صالحة للغرض الذى أعدت من أجله .</span>
+              </p>
+              <p><span>البند السادس</span></p>
+              <p><span>نشاط العين المؤجرة</span></p>
+              <p>
+                <span>لا يجوز للطرف الثاني المستأجر أن يستخدم العين المؤجرة فى غير النشاط المتفق عليه فى هذا
+                  العقد والمعدة له وهو استخدامها كمسكن له .</span>
+              </p>
+              <p><span>البند السابع</span></p>
+              <p><span>فواتير المياه والكهرباء والمعاملات الحكومية</span></p>
+              <p>
+                <span>يلتزم الطرف الثاني المستأجر بسداد كافة المطالبات الخاصة باستهلاك المياه والكهرباء والغاز
+                  والهاتف وكذا مصاريف الصيانة والإنارة الخاصة بالعقار وأجر الحارس ومصاريف الأجهزة المعدة لخدمة
+                  العين المؤجرة وكل ما يحدد بقرار من اتحاد الملاك أو الشاغلين المنظم لإدارة العقار ، وكذا كافة
+                  أنواع الضرائب المستحقة على العين موضوع العقد ، مع موافاة الطرف الأول المؤجر بما يفيد قيامه
+                  بسداد تلك النفقات بصفة شهرية .</span>
+              </p>
+              <p><span>البند الثامن</span></p>
+              <p><span>صيانة وترميم العين المؤجرة</span></p>
+              <p>
+                <span>اتفق الطرفان على التزام الطرف الثاني المستأجر بإجراء الصيانة والترميمات اللازمة والضرورية
+                  الناتجة عن استعماله العين ، كما أنه يكون مسئولا تجاه الطرف الأول المؤجر عن الترميمات
+                  المستعجلة والعيوب الجسيمة ، فإذا اهمل الطرف الثاني المستأجر ولحق الطرف الأول المؤجر ضرر من
+                  جراء ذلك كان الطرف الثاني المستأجر مسؤلا عن هذه الاضرار ومسئولا عن تعويض الطرف الأول المؤجر
+                  عن كل ما لحقه من جراء ذلك .</span>
+              </p>
+              <p>
+                <span>وكل ما ينفقه الطرف الثاني المستأجر على العين المؤجرة من دهانات أو ورق حائط أو ديكورات
+                  وخلافه فإنه لا يُلزم الطرف الأول المؤجر بشيء منها وأن الطرف الثاني المستأجر هو المتحمل لجميع
+                  تكاليف ما ينفقه على العين المؤجرة ولا يكون له الحق في مطالبة الطرف الأول المؤجر بأي تعويضات
+                  بسبب تلك الأعمال عند إخلاء العين موضوع العقد .</span>
+              </p>
+              <p><span>البند التاسع</span></p>
+              <p><span>المحافظة على العين المؤجرة</span></p>
+              <p>
+                <span>يلتزم الطرف الثاني المستأجر بأن يراعي العين المؤجرة كما يراعي كل شخص ماله الخاص وأن يمتنع
+                  عن استعمالها بطريقة تتنافى وشروط الإيجار أو أن يحدث فيها أي تغييرات أو هدم أو إزالة أو إقامة
+                  بناء إلا بتصريح مكتوب من الطرف الأول المؤجر ، كما أنه يلتزم بعدم وضع أية أجهزة لتوصيل المياه
+                  أو التيار الكهربائي أو الغاز أو التلفزيون أو الهاتف أو الستالايت وما شابه ذلك إلا بعد الحصول
+                  على موافقة مكتوبة من الطرف الأول المؤجر كما أنه يكون ملزما بأن يتبع الأصول الفنيه لذلك وبشرط
+                  عدم تهديد سلامة العقار .</span>
+              </p>
+              <p><span>البند العاشر</span></p>
+              <p><span>سلامة العقار</span></p>
+              <p>
+                <span>يلتزم الطرف الثاني المستأجر بأن لا يضع بالعين المؤجرة أية أشياء ثقيلة تؤثر على متانة العقار
+                  وأساساته أو تحدث تلفا به أو مواد ملتهبة أو قابلة للانفجار أو خطرة أو مضرة بالصحة أو أي آلات
+                  ميكانيكية مهما كان نوعها .</span>
+              </p>
+              <p><span>البند الحادي عشر</span></p>
+              <p><span>تسليم العين المؤجرة</span></p>
+              <p>
+                <span>يلتزم الطرف الثاني المستأجر عند انتهاء مدة هذا العقد بتسليم العين المؤجرة موضوع العقد إلى
+                  الطرف الأول المؤجر وذلك بعد اخلائها من الأشخاص والشواغل والمنقولات ، وفي حالة تأخر الطرف
+                  الثاني المستأجر عن تسليم العين المؤجرة في تاريخ انتهاء هذا العقد يكون ملزما بسداد غرامة
+                  تأخير قدرها ............. (فقط ............لا غير) للطرف الأول المؤجر عن كل يوم تأخير ، وقد
+                  اتفق الطرفان على أن هذا المبلغ هو تعويض نهائى متفق عليه وغير خاضع لرقابة أو تقدير القضاء
+                  .</span>
+              </p>
+              <p><span>البند الثاني عشر</span></p>
+              <p><span>الحجز التحفظي</span></p>
+              <p>
+                <span>اتفق الطرفان على أن كافة المنقولات الموجودة بالعين المؤجرة موضوع العقد هي ملك للطرف الثاني
+                  المستأجر وأنه في حالة تأخره عن سداد القيمة الإيجارية فإنه يحق للطرف الأول القيام بتوقيع
+                  الحجز التحفظي على جميع المنقولات الموجودة بالعين المؤجرة موضوع العقد وذلك لاستيفاء حقوقه
+                  منها وذلك بالإضافة إلى حقه في مصادرة مبلغ التأمين المنوه عنه في البند الرابع من هذا العقد
+                  .</span>
+              </p>
+              <p><span>البند الثالث عشر</span></p>
+              <p><span>التنازل عن العقد والإيجار من الباطن</span></p>
+              <p>
+                <span>لا يجوز للطرف الثاني المستأجر أن يتنازل عن العقد أو عن جزء منه للغير ، ولا يجوز له أيضا أن
+                  يؤجر كل أو بعض العين المؤجرة موضوع العقد دون موافقة مكتوبة من الطرف الأول المؤجر .</span>
+              </p>
+              <p><span>البند الرابع عشر</span></p>
+              <p><span>فسخ العقد</span></p>
+              <p>
+                <span>اتفق الطرفان على أنه يجوز لأي من الطرفين فسخ العقد قبل الميعاد المحدد لإنتهائه شريطة أن
+                  يقوم الطرف الراغب في الفسخ بإخطار الطرف الآخر قبل ذلك بثلاثة شهور علي الأقل دون تحمله بأي
+                  تعويض في هذه الحالة .</span>
+              </p>
+              <p>
+                <span>كما اتفق الطرفان على أن يكون العقد مفسوخا من تلقاء نفسه دون حاجة إلى تنبيه أو انذار أو لجوء
+                  إلى القضاء أو حكم في حالة اخلال الطرف الثاني المستأجر بأي من التزاماته المنصوص عليها
+                  والواردة في أي بند من بنود هذا العقد أو في حالة صدور أي فعل مخل بالآداب أو النظام العام منه
+                  مع التزامه في هذه الحالة بأن يسدد للطرف الأول المؤجر القيمة الإيجارية الخاصة بالعين موضوع
+                  العقد عن كامل المدة الباقية من العقد .</span>
+              </p>
+              <p>
+                <span>ويكون الطرف الثاني المستأجر ملزما بأن يؤدي للطرف الأول المؤجر مبلغ قدره ........ (فقط
+                  ...........لا غير) كتعويض نهائي متفق عليه غير خاضع لرقابة أو تقدير القضاء ، وذلك كله مع عدم
+                  الإخلال بأية تعويضات أخرى ورد ذكرها بأي بند من بنود هذا العقد .</span>
+              </p>
+              <p><span>البند الخامس عشر</span></p>
+              <p><span>الإخطارات</span></p>
+              <p>
+                <span>اتفق الطرفان على أن عنوانهما الثابت فى هذا العقد هو العنوان الذى تصح عليه كافة الإخطارات
+                  والمكاتبات والمراسلات لكل طرف ، وفي حالة قيام أي طرف منهما بتغيير عنوانه فإنه يكون ملزما
+                  باخطار الطرف الآخر بذلك التغيير في خلال اسبوع من حدوثه وإلا اعتبرت كافة الإخطارات والمكاتبات
+                  والمراسلات منتجة لكافة أثارها القانونية .</span>
+              </p>
+              <p><span>البند السادس عشر</span></p>
+              <p><span>الاختصاص القضائي</span></p>
+              <p>
+                <span>اتفق الطرفان على أن تختص محكمة...................بالفصل فى أي نزاع قد ينشأ – لاقدر الله –
+                  حول تفسير أو تنفيذ أي بند من بنود هذا العقد .</span>
+              </p>
+              <p><span>البند السابع عشر</span></p>
+              <p><span>نسخ العقد</span></p>
+              <p>
+                <span>حرر هذا العقد من نسختين بيد كل طرف نسخة واحدة بعد التوقيع على جميع صفحاتها وذلك للعمل
+                  بموجبها عند اللزوم
+                </span>
+              </p>
+              <p>
+                <span>
+                  (الطرف الأول – المؤجر)                                  (الطرف الثاني – المستأجر)</span>
+              </p>
+              <p></p>
+            </body>
+          </html>
+- model: core.HtmlTemplate
+  pk: 2
+  fields:
+      name: "Employee contract"
+      template_type: "EC"
+      template_code: ""
+
+- model: core.HtmlTemplate
+  pk: 3
+  fields:
+      name: "Invoice"
+      template_type: "I"
+      template_code: ""

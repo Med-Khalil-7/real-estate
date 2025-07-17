@@ -1,0 +1,161 @@
+# Superset stuff
+x-superset-image: &superset-image apache/superset:latest
+x-superset-depends-on: &superset-depends-on
+  - superset_pg
+  - superset_redis
+x-superset-volumes:
+  &superset-volumes # /app/pythonpath_docker will be appended to the PYTHONPATH in the final container
+  - ./superset:/app/docker
+  - superset_home:/app/superset_home
+
+version: '3.7'
+
+services:
+  # Django app
+  db:
+    image: 'postgres:13-alpine'
+    environment:
+      - POSTGRES_USER=real_estate
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=real_estate
+      - TZ=CET
+    ports:
+      - '5432:5432'
+    volumes:
+      - dbdata:/var/lib/postgresql/data:delegated
+
+  broker:
+    image: 'redis:alpine'
+    env_file: backend/.env
+
+  frontend:
+    build:
+      dockerfile: frontend/Dockerfile
+      context: .
+    stdin_open: true # Fix the timeout errors
+    tty: true
+    volumes:
+      - .:/app/
+      - /app/node_modules
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: development
+      CHOKIDAR_USEPOLLING: "true"
+
+  backend:
+    build:
+      dockerfile: backend/Dockerfile
+      context: .
+    ports:
+      - '8000:8000'
+    user: 'root'
+    volumes:
+      - ./:/home/user/app/
+    env_file: backend/.env
+    depends_on:
+      - db
+      - broker
+      - frontend
+
+  celery:
+    build:
+      dockerfile: backend/Dockerfile
+      context: .
+    command: python manage.py celery
+    volumes:
+      - ./:/home/user/app/
+    env_file: backend/.env
+    depends_on:
+      - db
+      - broker
+
+  beat:
+    build:
+      dockerfile: backend/Dockerfile
+      context: .
+    command: celery --app=real_estate beat -S redbeat.RedBeatScheduler --loglevel=debug
+    volumes:
+      - ./:/home/user/app/
+    env_file: backend/.env
+    depends_on:
+      - db
+      - broker
+
+  mailhog: # service for faking a SMTP server
+    image: mailhog/mailhog
+    ports:
+      - '1025:1025' # smtp server
+      - '8025:8025' # web ui
+
+  # Apache superset
+  superset_redis:
+    image: redis:latest
+    env_file: backend/.env
+    container_name: superset_cache
+    restart: unless-stopped
+    volumes:
+      - redis:/data
+
+  superset_pg:
+    env_file: backend/.env
+    image: postgres:10
+    container_name: superset_db
+    restart: unless-stopped
+    volumes:
+      - db_home:/var/lib/postgresql/data
+
+  superset:
+    env_file: backend/.env
+    image: *superset-image
+    container_name: superset_app
+    command: [ '/app/docker/docker-bootstrap.sh', 'app-gunicorn' ]
+    user: 'root'
+    restart: unless-stopped
+    ports:
+      - 8088:8088
+    depends_on: *superset-depends-on
+    volumes: *superset-volumes
+
+  superset-init:
+    image: *superset-image
+    container_name: superset_init
+    command: [ '/app/docker/docker-init.sh' ]
+    env_file: backend/.env
+    depends_on: *superset-depends-on
+    user: 'root'
+    volumes: *superset-volumes
+
+  superset-worker:
+    image: *superset-image
+    container_name: superset_worker
+    command: [ '/app/docker/docker-bootstrap.sh', 'worker' ]
+    env_file: backend/.env
+    restart: unless-stopped
+    depends_on: *superset-depends-on
+    user: 'root'
+    volumes: *superset-volumes
+
+  superset-worker-beat:
+    image: *superset-image
+    container_name: superset_worker_beat
+    command: [ '/app/docker/docker-bootstrap.sh', 'beat' ]
+    env_file: backend/.env
+    restart: unless-stopped
+    depends_on: *superset-depends-on
+    user: 'root'
+    volumes: *superset-volumes
+
+volumes:
+  # Django
+  dbdata:
+    external:
+      name: real_estate_dbdata
+
+  # Superset
+  superset_home:
+    external: false
+  db_home:
+    external: false
+  redis:
+    external: false

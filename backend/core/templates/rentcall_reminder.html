@@ -1,0 +1,29 @@
+{% block subject %}
+  {{ contract.property.owner.full_name }}
+
+  Dear, {{ contract.tenant.full_name }}
+{% endblock %}
+{% block body %}
+  Please find the rent notice of {% now "F" %}
+
+  The amount of your rent is {{ contract.location_price }} and the settlement has to be made before the end of the
+  month.
+
+  Payment modalities:
+
+  By transfer
+  Bank details: TBI
+
+  By cheque
+  Write your cheque to the order of {{ contract.property.owner.full_name }}  and send it to the following address:
+  {{ contract.property.owner.owner.address }}
+
+  By cash
+  Address: {{ contract.property.owner.address }}
+
+  Email: {{ contract.property.owner.email }}
+  We are at your service for any further information you may need.
+
+  Best regards,
+
+{% endblock %}

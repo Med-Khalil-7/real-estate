@@ -1,0 +1,8 @@
+{% block subject %}
+<strong>Account activation confirmation</strong>
+{% endblock %}
+{% block body %}
+{{ user.first_name }} {{ user.last_name }} has applied for registration,
+Please click on the link to confirm or refuse the application.
+http://{{ domain }}/#{{ route }}/{{ uid }}
+{% endblock %}
