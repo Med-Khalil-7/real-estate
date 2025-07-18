@@ -60,7 +60,7 @@ CELERY_BROKER_USE_SSL = broker_use_ssl
 CELERY_REDIS_BACKEND_USE_SSL = redis_backend_use_ssl
 
 # Redbeat https://redbeat.readthedocs.io/en/latest/config.html#redbeat-redis-url
-redbeat_redis_url = "redis://result:6379/1"
+redbeat_redis_url = config("CELERY_BROKER_URL", default="")
 
 # Whitenoise
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
