@@ -19,7 +19,7 @@ MEDIA_ROOT = base_dir_join("mediafiles")
 MEDIA_URL = "/media/"
 
 ADMIN_EMAIL = config("ADMIN_EMAIL", "")
-SERVER_EMAIL =  config("SERVER_EMAIL","")
+SERVER_EMAIL = config("SERVER_EMAIL", "")
 EMAIL_HOST = "smtp.sendgrid.net"
 EMAIL_HOST_USER = config("SENDGRID_USERNAME")
 EMAIL_HOST_PASSWORD = config("SENDGRID_PASSWORD")
@@ -46,6 +46,18 @@ WEBPACK_LOADER["DEFAULT"]["CACHE"] = True
 CELERY_BROKER_URL = config("REDIS_URL", default="")
 CELERY_RESULT_BACKEND = config("REDIS_URL", default="")
 CELERY_SEND_TASK_ERROR_EMAILS = True
+
+import ssl
+
+if CELERY_BROKER_URL.startswith("rediss://"):
+    broker_use_ssl = {"ssl_cert_reqs": ssl.CERT_NONE}
+    redis_backend_use_ssl = {"ssl_cert_reqs": ssl.CERT_NONE}
+else:
+    broker_use_ssl = None
+    redis_backend_use_ssl = None
+
+CELERY_BROKER_USE_SSL = broker_use_ssl
+CELERY_REDIS_BACKEND_USE_SSL = redis_backend_use_ssl
 
 # Redbeat https://redbeat.readthedocs.io/en/latest/config.html#redbeat-redis-url
 redbeat_redis_url = "redis://result:6379/1"
@@ -74,7 +86,9 @@ LOGGING = {
         },
     },
     "handlers": {
-        "null": {"class": "logging.NullHandler", },
+        "null": {
+            "class": "logging.NullHandler",
+        },
         "mail_admins": {
             "level": "ERROR",
             "class": "django.utils.log.AdminEmailHandler",
@@ -89,8 +103,15 @@ LOGGING = {
     },
     "loggers": {
         "": {"handlers": ["console"], "level": "INFO"},
-        "django.security.DisallowedHost": {"handlers": ["null"], "propagate": False, },
-        "django.request": {"handlers": ["mail_admins"], "level": "ERROR", "propagate": True, },
+        "django.security.DisallowedHost": {
+            "handlers": ["null"],
+            "propagate": False,
+        },
+        "django.request": {
+            "handlers": ["mail_admins"],
+            "level": "ERROR",
+            "propagate": True,
+        },
         "log_request_id.middleware": {
             "handlers": ["console"],
             "level": "DEBUG",
